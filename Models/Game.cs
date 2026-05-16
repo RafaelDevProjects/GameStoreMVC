@@ -5,6 +5,7 @@ namespace GameStoreMVC.Models
 {
     public class Game
     {
+
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Título é obrigatório")]
