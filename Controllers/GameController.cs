@@ -37,6 +37,10 @@ namespace GameStoreMVC.Controllers
 
 
 
+
+
+
+
         // POST: /Game/Criar
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -53,6 +57,10 @@ namespace GameStoreMVC.Controllers
             TempData["Sucesso"] = $"Jogo '{game.Titulo}' cadastrado com sucesso!";
             return RedirectToAction("Index", "Home");
         }
+
+
+
+
 
         // GET: /Game/Editar/5
         [Authorize(Roles = "Admin")]
