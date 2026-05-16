@@ -25,6 +25,9 @@ namespace GameStoreMVC.Controllers
 
 
 
+
+
+
         // GET: /Game/Criar
         [Authorize(Roles = "Admin")]
         public IActionResult Criar()
