@@ -52,6 +52,10 @@ namespace GameStoreMVC.Repositories
             _context.Games.Update(game);
         }
 
+
+
+
+
         public Task RemoverAsync(int id)
         {
             var game = _context.Games.Find(id);
