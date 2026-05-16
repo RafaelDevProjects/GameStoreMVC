@@ -29,6 +29,8 @@ namespace GameStoreMVC.Controllers
             return View();
         }
 
+
+
         // POST: /Game/Criar
         [HttpPost]
         [ValidateAntiForgeryToken]
