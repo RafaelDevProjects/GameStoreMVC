@@ -17,6 +17,9 @@ namespace GameStoreMVC.Controllers
             _usuarioRepository = usuarioRepository;
         }
 
+
+
+
         [HttpGet]
         public IActionResult Login()
         {
