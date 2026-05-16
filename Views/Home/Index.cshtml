@@ -1,0 +1,90 @@
+@model IEnumerable<GameStoreMVC.Models.Game>
+@{
+    ViewData["Title"] = "Games | Home";
+    var destaques = ViewBag.Destaques as IEnumerable<GameStoreMVC.Models.Game> ?? new List<GameStoreMVC.Models.Game>();
+    var categoriaAtual = ViewBag.Categoria as string ?? "";
+    var categorias = new[] { "RPG", "Ação", "Corrida", "Aventura" };
+}
+
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container hero-content">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h1 class="hero-title">Domine o <span>Jogo</span></h1>
+                <p class="hero-subtitle mt-3">Os lançamentos mais esperados e as melhores ofertas em um só lugar. Upgrade no seu setup começa aqui.</p>
+                <a href="#jogos" class="btn btn-ver-ofertas mt-4">Ver Ofertas</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Categorias -->
+<div class="container">
+    <div class="categoria-tabs mt-3">
+        <a asp-action="Index" asp-route-categoria="" class="btn-categoria @(string.IsNullOrEmpty(categoriaAtual) ? "active" : "")">Todos</a>
+        @foreach (var cat in categorias)
+        {
+            <a asp-action="Index" asp-route-categoria="@cat"
+               class="btn-categoria @(categoriaAtual == cat ? "active" : "")">@cat</a>
+        }
+    </div>
+</div>
+
+<div class="container pb-5" id="jogos">
+
+    <!-- Admin: Botão novo jogo -->
+    @if (User.IsInRole("Admin"))
+    {
+        <div class="mb-4">
+            <a asp-controller="Game" asp-action="Criar" class="btn btn-novo-jogo">
+                <i class="fas fa-plus me-2"></i>Cadastrar Novo Jogo
+            </a>
+        </div>
+    }
+
+    <!-- Em Destaque -->
+    @if (destaques.Any())
+    {
+        <h2 class="section-title"><i class="fas fa-star me-2"></i>Em Destaque</h2>
+        <div class="row g-3 mb-5">
+            @foreach (var game in destaques)
+            {
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    @await Html.PartialAsync("_GameCard", game)
+                </div>
+            }
+        </div>
+    }
+
+    <!-- Todos os Jogos -->
+    <h2 class="section-title">
+        @if (!string.IsNullOrEmpty(categoriaAtual))
+        { <span>@categoriaAtual</span> }
+        else
+        { <span>Todos os Jogos</span> }
+    </h2>
+
+    @if (!Model.Any())
+    {
+        <div class="text-center py-5">
+            <i class="fas fa-gamepad" style="font-size:4rem;color:#4b5563;"></i>
+            <p class="mt-3" style="color:#6b7280;">Nenhum jogo cadastrado ainda.</p>
+            @if (User.IsInRole("Admin"))
+            {
+                <a asp-controller="Game" asp-action="Criar" class="btn btn-novo-jogo mt-2">Adicionar primeiro jogo</a>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="row g-3">
+            @foreach (var game in Model)
+            {
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    @await Html.PartialAsync("_GameCard", game)
+                </div>
+            }
+        </div>
+    }
+</div>

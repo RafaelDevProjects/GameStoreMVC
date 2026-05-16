@@ -1,0 +1,31 @@
+@model GameStoreMVC.Models.Game
+
+<div class="game-card">
+    @if (!string.IsNullOrEmpty(Model.UrlCapa))
+    {
+        <img src="@Model.UrlCapa" alt="@Model.Titulo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+        <div class="placeholder-img" style="display:none;">🎮</div>
+    }
+    else
+    {
+        <div class="placeholder-img">🎮</div>
+    }
+    <div class="card-body d-flex flex-column gap-2">
+        <span class="badge-categoria">@Model.Categoria</span>
+        <h5 class="card-title">@Model.Titulo</h5>
+        <p class="preco">R$ @Model.Preco.ToString("N2")</p>
+        <button class="btn-comprar">Comprar</button>
+
+        @if (User.IsInRole("Admin"))
+        {
+            <div class="d-flex gap-2 mt-1">
+                <a asp-controller="Game" asp-action="Editar" asp-route-id="@Model.Id" class="btn-editar">Editar</a>
+                <form asp-controller="Game" asp-action="Excluir" asp-route-id="@Model.Id" method="post"
+                      onsubmit="return confirm('Excluir @Model.Titulo?')">
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn-excluir">Excluir</button>
+                </form>
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - LOJA GAME</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+        :root { --primary:#7c3aed; --primary-dark:#5b21b6; --accent:#a855f7; --dark:#0f0f1a; --dark-card:#1a1a2e; --text-m:#94a3b8; }
+        body { background:var(--dark); color:#e2e8f0; font-family:'Segoe UI',sans-serif; min-height:100vh; display:flex; flex-direction:column; }
+        .navbar { background:var(--dark-card)!important; border-bottom:2px solid var(--primary); }
+        .navbar-brand { font-size:1.5rem; font-weight:900; }
+        .navbar-brand .game { color:var(--accent); }
+        .navbar-brand .store { color:#fff; }
+        .nav-link { color:#cbd5e1!important; font-weight:500; transition:color .2s; }
+        .nav-link:hover { color:var(--accent)!important; }
+        .btn-login-nav { background:var(--primary); color:#fff!important; border-radius:8px; padding:6px 18px!important; }
+        .btn-login-nav:hover { background:var(--primary-dark)!important; }
+        .game-card { background:var(--dark-card); border:1px solid rgba(124,58,237,.2); border-radius:12px; overflow:hidden; transition:transform .3s,box-shadow .3s; height:100%; }
+        .game-card:hover { transform:translateY(-6px); box-shadow:0 8px 32px rgba(124,58,237,.4); }
+        .game-card img { width:100%; height:180px; object-fit:cover; }
+        .game-card .card-body { padding:1rem; }
+        .game-card .card-title { font-weight:700; font-size:1rem; color:#f1f5f9; }
+        .game-card .preco { font-size:1.1rem; font-weight:800; color:var(--accent); }
+        .btn-comprar { background:var(--primary); color:#fff; border:none; border-radius:8px; padding:8px 20px; font-weight:600; width:100%; transition:background .2s; }
+        .btn-comprar:hover { background:var(--primary-dark); color:#fff; }
+        .btn-editar { background:#f59e0b; color:#fff; border:none; border-radius:6px; padding:5px 14px; font-size:.85rem; font-weight:600; }
+        .btn-excluir { background:#ef4444; color:#fff; border:none; border-radius:6px; padding:5px 14px; font-size:.85rem; font-weight:600; }
+        .btn-novo-jogo { background:#10b981; color:#fff; border:none; border-radius:8px; padding:10px 24px; font-weight:700; transition:background .2s; }
+        .btn-novo-jogo:hover { background:#059669; color:#fff; }
+        .hero-section { background:linear-gradient(135deg,#0f0f1a 0%,#1a0533 50%,#0f0f1a 100%); border-bottom:1px solid rgba(124,58,237,.3); padding:3rem 0; position:relative; overflow:hidden; }
+        .hero-section::before { content:''; position:absolute; top:0;left:0;right:0;bottom:0; background:url('https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1200&auto=format&fit=crop&q=60') center/cover no-repeat; opacity:.15; }
+        .hero-content { position:relative; z-index:1; }
+        .hero-title { font-size:clamp(2rem,5vw,3.5rem); font-weight:900; color:#fff; line-height:1.1; }
+        .hero-title span { color:var(--accent); }
+        .hero-subtitle { color:var(--text-m); font-size:1.1rem; max-width:500px; }
+        .btn-ver-ofertas { background:var(--primary); color:#fff; border:none; border-radius:10px; padding:12px 32px; font-size:1rem; font-weight:700; transition:all .3s; }
+        .btn-ver-ofertas:hover { background:var(--accent); color:#fff; transform:scale(1.05); }
+        .categoria-tabs { display:flex; gap:.5rem; flex-wrap:wrap; justify-content:center; padding:1.5rem 0; }
+        .btn-categoria { background:var(--dark-card); color:#cbd5e1; border:1px solid rgba(124,58,237,.3); border-radius:20px; padding:6px 20px; font-size:.9rem; transition:all .2s; }
+        .btn-categoria:hover,.btn-categoria.active { background:var(--primary); color:#fff; border-color:var(--primary); }
+        .section-title { font-size:1.3rem; font-weight:800; color:#f1f5f9; margin-bottom:1.5rem; }
+        .section-title i { color:#f59e0b; }
+        footer { background:var(--dark-card); border-top:1px solid rgba(124,58,237,.3); padding:2.5rem 0 1rem; margin-top:auto; }
+        footer .brand-name { font-size:1.3rem; font-weight:900; }
+        footer .brand-name .game { color:var(--accent); }
+        footer .brand-name .store { color:#fff; }
+        footer p { color:var(--text-m); font-size:.85rem; }
+        footer h6 { color:#f1f5f9; font-weight:700; font-size:.9rem; }
+        footer a { color:var(--text-m); text-decoration:none; font-size:.85rem; }
+        footer a:hover { color:var(--accent); }
+        footer .social-icons a { font-size:1.1rem; margin-right:.5rem; }
+        .newsletter-input { background:#0f0f1a; border:1px solid rgba(124,58,237,.4); color:#e2e8f0; border-radius:6px 0 0 6px; padding:8px 14px; font-size:.85rem; }
+        .newsletter-input:focus { outline:none; border-color:var(--primary); }
+        .newsletter-btn { background:var(--primary); color:#fff; border:none; border-radius:0 6px 6px 0; padding:8px 16px; font-weight:700; font-size:.85rem; }
+        .form-card { background:var(--dark-card); border:1px solid rgba(124,58,237,.3); border-radius:16px; padding:2.5rem; max-width:480px; width:100%; }
+        .form-card h2 { font-weight:800; color:#f1f5f9; }
+        .form-card .subtitle { color:var(--text-m); font-size:.9rem; }
+        .form-control,.form-select { background:#0f0f1a!important; border:1px solid rgba(124,58,237,.4)!important; color:#e2e8f0!important; border-radius:8px; }
+        .form-control:focus,.form-select:focus { border-color:var(--primary)!important; box-shadow:0 0 0 3px rgba(124,58,237,.2)!important; }
+        .form-label { color:#cbd5e1; font-size:.9rem; font-weight:500; }
+        .btn-primary-custom { background:var(--primary); color:#fff; border:none; border-radius:8px; padding:12px; font-weight:700; font-size:1rem; width:100%; transition:background .2s; }
+        .btn-primary-custom:hover { background:var(--primary-dark); }
+        .placeholder-img { width:100%; height:180px; background:linear-gradient(135deg,#1a0533,#0f0f1a); display:flex; align-items:center; justify-content:center; font-size:3rem; }
+        .badge-categoria { background:rgba(124,58,237,.3); color:var(--accent); border-radius:12px; padding:2px 10px; font-size:.75rem; font-weight:600; }
+        .alert-success-custom { background:rgba(16,185,129,.15); border:1px solid rgba(16,185,129,.4); color:#6ee7b7; border-radius:8px; padding:12px 16px; }
+        .alert-danger-custom { background:rgba(239,68,68,.15); border:1px solid rgba(239,68,68,.4); color:#fca5a5; border-radius:8px; padding:12px 16px; }
+        .text-validation { color:#f87171; font-size:.8rem; }
+        @@media(max-width:768px) { .form-card { padding:1.5rem; border-radius:12px; } }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" asp-controller="Home" asp-action="Index">
+                <span class="game">GAME</span><span class="store">STORE</span>
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+                <i class="fas fa-bars" style="color:#7c3aed"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navMenu">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto align-items-center gap-2">
+                    @if (User.Identity?.IsAuthenticated == true)
+                    {
+                        <li class="nav-item">
+                            <span class="nav-link" style="color:#94a3b8!important;font-size:.9rem;">
+                                <i class="fas fa-user-circle me-1"></i>@User.Identity.Name
+                                @if (User.IsInRole("Admin")) { <span class="badge-categoria ms-1">Admin</span> }
+                            </span>
+                        </li>
+                        <li class="nav-item">
+                            <form asp-controller="Login" asp-action="Logout" method="post" class="d-inline">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-sm btn-outline-danger">
+                                    <i class="fas fa-sign-out-alt me-1"></i>Sair
+                                </button>
+                            </form>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link btn-login-nav" asp-controller="Login" asp-action="Login">
+                                <i class="fas fa-sign-in-alt me-1"></i>Login
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    @if (TempData["Sucesso"] != null)
+    {
+        <div class="container mt-3">
+            <div class="alert-success-custom"><i class="fas fa-check-circle me-2"></i>@TempData["Sucesso"]</div>
+        </div>
+    }
+
+    <main>@RenderBody()</main>
+
+    <footer>
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="brand-name mb-2"><span class="game">GAME</span><span class="store">STORE</span></div>
+                    <p>Sua arena gamer definitiva. Os melhores títulos, as ofertas mais quentes e a maior comunidade de jogadores você encontra aqui.</p>
+                    <div class="social-icons mt-2">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-discord"></i></a>
+                        <a href="#"><i class="fab fa-twitch"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <h6>LOJA</h6>
+                    <div class="d-flex flex-column gap-1 mt-2">
+                        <a href="#">Todos os Games</a>
+                        <a href="#">Lançamentos</a>
+                        <a href="#">Promoções</a>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <h6>SUPORTE</h6>
+                    <div class="d-flex flex-column gap-1 mt-2">
+                        <a href="#">Privacidade</a>
+                        <a href="#">Termos de Uso</a>
+                        <a href="#">Fale Conosco</a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <h6>FIQUE POR DENTRO</h6>
+                    <p class="mt-2">Receba cupons de desconto exclusivos!</p>
+                    <div class="input-group mt-2">
+                        <input type="email" class="newsletter-input form-control" placeholder="Seu melhor e-mail" />
+                        <button class="newsletter-btn">OK</button>
+                    </div>
+                </div>
+            </div>
+            <hr style="border-color:rgba(124,58,237,.2);margin:1.5rem 0;" />
+            <p class="text-center mb-0" style="font-size:.8rem;color:#475569;">
+                &copy; @DateTime.Now.Year - GameStore. Todos os direitos reservados.
+            </p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

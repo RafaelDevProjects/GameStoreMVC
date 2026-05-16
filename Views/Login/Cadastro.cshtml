@@ -1,0 +1,41 @@
+@model GameStoreMVC.ViewModels.CadastroViewModel
+@{
+    ViewData["Title"] = "Criar Conta";
+}
+
+<div class="d-flex justify-content-center align-items-center py-5">
+    <div class="form-card">
+        <h2 class="text-center">Criar Conta</h2>
+        <p class="subtitle text-center mb-4">Junte-se a maior comunidade gamer</p>
+
+        <form asp-action="Cadastro" method="post">
+            @Html.AntiForgeryToken()
+            <div class="mb-3">
+                <label asp-for="Nome" class="form-label">Nome</label>
+                <input asp-for="Nome" class="form-control" placeholder="Seu nome completo" />
+                <span asp-validation-for="Nome" class="text-validation"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Email" class="form-label">E-mail</label>
+                <input asp-for="Email" class="form-control" placeholder="nome@exemplo.com" />
+                <span asp-validation-for="Email" class="text-validation"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Senha" class="form-label">Senha</label>
+                <input asp-for="Senha" type="password" class="form-control" placeholder="Minimo 6 caracteres" />
+                <span asp-validation-for="Senha" class="text-validation"></span>
+            </div>
+            <div class="mb-4">
+                <label asp-for="ConfirmarSenha" class="form-label">Confirmar Senha</label>
+                <input asp-for="ConfirmarSenha" type="password" class="form-control" placeholder="Repita a senha" />
+                <span asp-validation-for="ConfirmarSenha" class="text-validation"></span>
+            </div>
+            <button type="submit" class="btn-primary-custom">Criar Conta</button>
+        </form>
+
+        <p class="text-center mt-3" style="font-size:.9rem;color:#94a3b8;">
+            Ja tem uma conta?
+            <a asp-action="Login" style="color:#a855f7;font-weight:600;">Fazer login</a>
+        </p>
+    </div>
+</div>
