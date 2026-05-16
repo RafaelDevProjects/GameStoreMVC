@@ -12,5 +12,8 @@ namespace GameStoreMVC.Interfaces
         Task AtualizarAsync(Game game);
         Task RemoverAsync(int id);
         Task SalvarAsync();
+
+
+
     }
 }
