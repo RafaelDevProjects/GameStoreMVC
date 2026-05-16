@@ -9,5 +9,7 @@ namespace GameStoreMVC.Interfaces
         Task<bool> EmailExisteAsync(string email);
         Task AdicionarAsync(Usuario usuario);
         Task SalvarAsync();
+
+
     }
 }
