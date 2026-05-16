@@ -79,3 +79,11 @@ GameStoreMVC/
 - Autorizacao por Role (Admin)
 - Anti-forgery tokens em todos os formularios POST
 
+
+## Integrantes
+
+| Nome | RM |
+|---|---|
+| Rafael Almeida | RM554019 |
+| Giovanna Franco | RM553701  |
+| Rafael Jorge | RM552765 |
