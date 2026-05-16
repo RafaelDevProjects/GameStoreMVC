@@ -22,6 +22,9 @@ namespace GameStoreMVC.Controllers
             return View(games);
         }
 
+
+
+
         // GET: /Game/Criar
         [Authorize(Roles = "Admin")]
         public IActionResult Criar()
