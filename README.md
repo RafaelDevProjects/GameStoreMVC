@@ -1,5 +1,13 @@
 # GameStoreMVC - Checkpoint 6 - C# Development - FIAP 3ESPR
 
+## Integrantes
+
+| Nome | RM |
+|---|---|
+| Rafael Almeida | RM554019 |
+| Giovanna Franco | RM553701  |
+| Rafael Jorge | RM552765 |
+
 ## Como Executar
 
 ### Pre-requisitos
