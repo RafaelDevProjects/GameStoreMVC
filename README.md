@@ -79,16 +79,3 @@ GameStoreMVC/
 - Autorizacao por Role (Admin)
 - Anti-forgery tokens em todos os formularios POST
 
-## Commits Semanticos Sugeridos
-1. `feat: initial project setup ASP.NET Core MVC`
-2. `feat: add Game and Usuario models`
-3. `feat: implement AppDbContext with EF Core MySQL`
-4. `feat: create IUsuarioRepository and IGameRepository interfaces`
-5. `feat: implement UsuarioRepository and GameRepository`
-6. `feat: add BCrypt authentication in LoginController`
-7. `feat: implement Claims-based authorization`
-8. `feat: create Home view with hero section and game cards`
-9. `feat: add Game CRUD views (Criar, Editar)`
-10. `feat: add responsive Bootstrap layout with gaming theme`
-11. `fix: seed admin user on startup`
-12. `style: improve mobile responsiveness`
