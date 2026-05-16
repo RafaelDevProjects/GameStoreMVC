@@ -4,6 +4,8 @@ namespace GameStoreMVC.Models
 {
     public class Usuario
     {
+
+
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Nome é obrigatório")]
